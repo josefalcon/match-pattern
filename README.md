@@ -23,16 +23,19 @@ if (pattern.test('https://www.google.com/foo/baz/bar')) {
 ```sh
 npm install match-pattern
 ```
-## `parse()`
+
+## Documentation
+
+### `parse()`
 
 Use `parse()` to parse a string match pattern. Returns a `RegExp` if the parse
 was successful, null otherwise.
 
-## `allUrls()`
+### `allUrls()`
 
 Returns a `RegExp` matching any URL that uses a permitted scheme.
 
-## `newPattern()`
+### `newPattern()`
 
 Match patterns are safely built with `newPattern()`, followed by a scheme, a
 host, and a path. While more verbose, it guarantees a valid pattern.
