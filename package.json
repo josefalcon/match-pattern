@@ -1,5 +1,5 @@
 {
-  "name": "match-patterns",
+  "name": "match-pattern",
   "version": "0.0.1",
   "description": "A js package for Chrome's match patterns",
   "main": "index.js",
@@ -8,9 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/josefalcon/match-patterns.git"
+    "url": "git://github.com/josefalcon/match-pattern.git"
   },
-  "homepage": "https://github.com/josefalcon/match-patterns",
+  "homepage": "https://github.com/josefalcon/match-pattern",
   "author": {
     "name": "Jose Falcon",
     "email": "chedkid@gmail.com"
