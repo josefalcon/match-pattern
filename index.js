@@ -65,46 +65,7 @@ function allUrls() {
   return /(http|https|file|ftp):\/\/.+/;
 }
 
-var SchemeBuilder = function() {}
-
-var HostBuilder = function(scheme) {
-  this.scheme = scheme;
-}
-
-var PathBuilder = function(scheme, host) {
-  this.scheme = scheme;
-  this.host = host;
-}
-
-var schemes = ['http', 'https', 'ftp'];
-schemes.forEach(function(scheme) {
-  SchemeBuilder.prototype[scheme] = function() {
-    return new HostBuilder(scheme);
-  }
-});
-
-SchemeBuilder.prototype.scheme = function() {
-  return new HostBuilder('*');
-}
-
-SchemeBuilder.prototype.file = function() {
-  return new PathBuilder('file', null);
-}
-
-HostBuilder.prototype.host = function(host) {
-  return new PathBuilder(this.scheme, host || '*');
-};
-
-PathBuilder.prototype.path = function(path) {
-  return makeRegExp(this.scheme, this.host, path || '*');
-};
-
-function newPattern() {
-  return new SchemeBuilder();
-}
-
 module.exports = {
   parse: parse,
   allUrls: allUrls,
-  newPattern: newPattern
 }

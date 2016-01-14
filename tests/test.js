@@ -41,69 +41,34 @@ matchTest('http://*/*', [
   'http://example.org/foo/bar.html'
 ]);
 
-builderTest(
-  'http://*/*',
-  matchPatterns.newPattern().http().host().path()
-);
-
 matchTest('http://*/foo*', [
   'http://example.com/foo/bar.html',
   'http://www.google.com/foo'
 ]);
-
-builderTest(
-  'http://*/foo*',
-  matchPatterns.newPattern().http().host().path('foo*')
-);
 
 matchTest('https://*.google.com/foo*bar', [
   'https://www.google.com/foo/baz/bar',
   'https://docs.google.com/foobar'
 ]);
 
-builderTest(
-  'https://*.google.com/foo*bar',
-  matchPatterns.newPattern().https().host('*.google.com').path('foo*bar')
-);
-
 matchTest('http://example.org/foo/bar.html', [
   'http://example.org/foo/bar.html'
 ]);
-
-builderTest(
-  'http://example.org/foo/bar.html',
-  matchPatterns.newPattern().http().host('example.org').path('foo/bar.html')
-);
 
 matchTest('file:///foo*', [
   'file:///foo/bar.html',
   'file:///foo'
 ]);
 
-builderTest(
-  'file:///foo*',
-  matchPatterns.newPattern().file().path('foo*')
-);
-
 matchTest('http://127.0.0.1/*', [
   'http://127.0.0.1/',
   'http://127.0.0.1/foo/bar.html'
 ]);
 
-builderTest(
-  'http://127.0.0.1/*',
-  matchPatterns.newPattern().http().host('127.0.0.1').path()
-);
-
 matchTest('*://mail.google.com/*', [
   'https://mail.google.com/foobar',
   'http://mail.google.com/foo/baz/bar'
 ]);
-
-builderTest(
-  '*://mail.google.com/*',
-  matchPatterns.newPattern().scheme().host('mail.google.com').path()
-);
 
 test('allUrls matches any scheme', function(t) {
   t.plan(4);
@@ -118,7 +83,7 @@ test('allUrls matches any scheme', function(t) {
 test('any scheme only matches http and https', function(t) {
   t.plan(4)
 
-  var pattern = matchPatterns.newPattern().scheme().host().path();
+  var pattern = matchPatterns.parse("*://*/*")
   t.ok(pattern.test('http://example.org'), 'matches http');
   t.ok(pattern.test('https://foobar.baz'), 'matches https');
   t.notOk(pattern.test('file:///file.jpg'), 'does not match file');
@@ -136,12 +101,4 @@ function matchTest(matchPattern, examples) {
       t.ok(pattern.test(e), 'matches ' + e);
     });
   });
-}
-
-function builderTest(uri, built) {
-  test('builder matches ' + uri, function(t) {
-    t.plan(1);
-    var parsePattern = matchPatterns.parse(uri);
-    t.equal(parsePattern.toString(), built.toString());
-  })
 }
