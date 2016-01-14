@@ -1,6 +1,6 @@
 {
   "name": "match-pattern",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A js package for Chrome's match patterns",
   "main": "index.js",
   "scripts": {
